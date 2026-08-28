@@ -1,0 +1,2 @@
+namespace ToneCustoms.ShellStudio.Props;
+public sealed class GtaPropIndex { readonly Dictionary<string,PropAsset> byModel=new(StringComparer.OrdinalIgnoreCase);public int Count=>byModel.Count;public void LoadLines(IEnumerable<string> models,string category="GTA V"){foreach(var raw in models){var m=raw.Trim();if(m.Length==0||m.StartsWith('#'))continue;byModel[m]=new(m,m,category);}}public IEnumerable<PropAsset> Search(string q,int max=100)=>byModel.Values.Where(x=>x.Model.Contains(q,StringComparison.OrdinalIgnoreCase)).Take(max); }

@@ -1,0 +1,3 @@
+namespace ToneCustoms.ShellStudio.Textures;
+public sealed record TextureImport(string Source,string Extension,bool RequiresConversion,string TargetName);
+public sealed class TextureImportService { static readonly HashSet<string> Input=new(StringComparer.OrdinalIgnoreCase){".dds",".png",".jpg",".jpeg",".tga",".bmp",".tif",".tiff"};public TextureImport Inspect(string path){if(!File.Exists(path))throw new FileNotFoundException(path);var ext=Path.GetExtension(path);if(!Input.Contains(ext))throw new NotSupportedException("Unsupported texture input: "+ext);return new(path,ext,!ext.Equals(".dds",StringComparison.OrdinalIgnoreCase),Path.GetFileNameWithoutExtension(path)+".dds");} }
