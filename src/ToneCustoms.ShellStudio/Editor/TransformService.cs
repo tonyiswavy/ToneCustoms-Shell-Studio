@@ -1,0 +1,3 @@
+using ToneCustoms.ShellStudio.Core;
+namespace ToneCustoms.ShellStudio.Editor;
+public sealed class TransformService { public void Move(IEnumerable<SceneObject> items,Vec3 delta){foreach(var o in items)o.Position=new(o.Position.X+delta.X,o.Position.Y+delta.Y,o.Position.Z+delta.Z);}public void Rotate(IEnumerable<SceneObject> items,Vec3 delta){foreach(var o in items)o.Rotation=new(o.Rotation.X+delta.X,o.Rotation.Y+delta.Y,o.Rotation.Z+delta.Z);}public void Scale(IEnumerable<SceneObject> items,Vec3 factor){foreach(var o in items)o.Scale=new(o.Scale.X*factor.X,o.Scale.Y*factor.Y,o.Scale.Z*factor.Z);} }
