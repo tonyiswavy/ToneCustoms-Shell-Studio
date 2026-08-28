@@ -1,9 +1,3 @@
 using System.Text.Json;
 namespace ToneCustoms.ShellStudio.Core;
-public sealed class ProjectService {
- static readonly JsonSerializerOptions Json=new(){WriteIndented=true};
- public async Task SaveAsync(ShellProject p,string path){Directory.CreateDirectory(Path.GetDirectoryName(path)!);await File.WriteAllTextAsync(path,JsonSerializer.Serialize(p,Json));}
- public async Task<ShellProject> LoadAsync(string path)=>JsonSerializer.Deserialize<ShellProject>(await File.ReadAllTextAsync(path),Json)??new();
- public async Task AutosaveAsync(ShellProject p,string root)=>await SaveAsync(p,Path.Combine(root,"Autosave",p.Name+".autosave.tcshell"));
- public async Task SnapshotAsync(ShellProject p,string root)=>await SaveAsync(p,Path.Combine(root,"Versions",p.Name,$"{DateTime.UtcNow:yyyyMMdd-HHmmss}.tcshell"));
-}
+public sealed class ProjectService { static readonly JsonSerializerOptions Json=new(){WriteIndented=true};public async Task SaveAsync(ShellProject p,string path){var dir=Path.GetDirectoryName(path);if(!string.IsNullOrWhiteSpace(dir))Directory.CreateDirectory(dir);await File.WriteAllTextAsync(path,JsonSerializer.Serialize(p,Json));}public async Task<ShellProject> LoadAsync(string path)=>JsonSerializer.Deserialize<ShellProject>(await File.ReadAllTextAsync(path),Json)??new();public async Task AutosaveAsync(ShellProject p,string root)=>await SaveAsync(p,Path.Combine(root,"Autosave",p.Name+".autosave.tcshell"));public async Task SnapshotAsync(ShellProject p,string root)=>await SaveAsync(p,Path.Combine(root,"Versions",p.Name,$"{DateTime.UtcNow:yyyyMMdd-HHmmss}.tcshell"));}
