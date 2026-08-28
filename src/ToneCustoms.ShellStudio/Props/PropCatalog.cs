@@ -1,0 +1,3 @@
+namespace ToneCustoms.ShellStudio.Props;
+public sealed record PropAsset(string Name,string Model,string Category,string? SourcePath=null);
+public sealed class PropCatalog { readonly List<PropAsset> _items=[]; public IReadOnlyList<PropAsset> Items=>_items; public void AddCustom(string path)=>_items.Add(new(Path.GetFileNameWithoutExtension(path),Path.GetFileNameWithoutExtension(path),"Custom",path)); public IEnumerable<PropAsset> Search(string q)=>_items.Where(x=>x.Name.Contains(q,StringComparison.OrdinalIgnoreCase)||x.Model.Contains(q,StringComparison.OrdinalIgnoreCase)||x.Category.Contains(q,StringComparison.OrdinalIgnoreCase)); }
