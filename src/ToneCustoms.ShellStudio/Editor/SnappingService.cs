@@ -1,3 +1,3 @@
-using System.Numerics;using ToneCustoms.ShellStudio.Core;
+using ToneCustoms.ShellStudio.Core;
 namespace ToneCustoms.ShellStudio.Editor;
-public sealed class SnappingService { public Vector3 Grid(Vector3 v,float size)=>new(MathF.Round(v.X/size)*size,MathF.Round(v.Y/size)*size,MathF.Round(v.Z/size)*size); public Vector3 Smart(Vector3 p,IEnumerable<SceneObject> objects,float threshold=.2f){foreach(var o in objects){if(Vector3.Distance(p,o.Position)<=threshold)return o.Position;}return p;} }
+public sealed class SnappingService { public Vec3 Grid(Vec3 v,float g)=>new(MathF.Round(v.X/g)*g,MathF.Round(v.Y/g)*g,MathF.Round(v.Z/g)*g);public Vec3 Smart(Vec3 p,IEnumerable<SceneObject> objects,float t=.2f){foreach(var o in objects){var dx=p.X-o.Position.X;var dy=p.Y-o.Position.Y;var dz=p.Z-o.Position.Z;if(MathF.Sqrt(dx*dx+dy*dy+dz*dz)<=t)return new(o.Position.X,o.Position.Y,o.Position.Z);}return p;} }

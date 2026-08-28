@@ -1,4 +1,3 @@
-using System.Numerics;
 namespace ToneCustoms.ShellStudio.Core;
-public sealed record SceneBounds(Vector3 Min,Vector3 Max){public Vector3 Size=>Max-Min;}
-public sealed class BoundsService { public SceneBounds Calculate(ShellProject p){if(p.Objects.Count==0)return new(Vector3.Zero,Vector3.Zero);var min=new Vector3(float.MaxValue),max=new Vector3(float.MinValue);foreach(var o in p.Objects){var half=o.Scale/2;min=Vector3.Min(min,o.Position-half);max=Vector3.Max(max,o.Position+half);}return new(min,max);} }
+public sealed record SceneBounds(Vec3 Min,Vec3 Max){public Vec3 Size=>new(Max.X-Min.X,Max.Y-Min.Y,Max.Z-Min.Z);}
+public sealed class BoundsService { public SceneBounds Calculate(ShellProject p){if(p.Objects.Count==0)return new(new(),new());float minX=float.MaxValue,minY=float.MaxValue,minZ=float.MaxValue,maxX=float.MinValue,maxY=float.MinValue,maxZ=float.MinValue;foreach(var o in p.Objects){minX=Math.Min(minX,o.Position.X-o.Scale.X/2);minY=Math.Min(minY,o.Position.Y-o.Scale.Y/2);minZ=Math.Min(minZ,o.Position.Z-o.Scale.Z/2);maxX=Math.Max(maxX,o.Position.X+o.Scale.X/2);maxY=Math.Max(maxY,o.Position.Y+o.Scale.Y/2);maxZ=Math.Max(maxZ,o.Position.Z+o.Scale.Z/2);}return new(new(minX,minY,minZ),new(maxX,maxY,maxZ));} }
