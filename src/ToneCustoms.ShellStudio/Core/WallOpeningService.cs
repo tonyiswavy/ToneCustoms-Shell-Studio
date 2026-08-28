@@ -1,0 +1,3 @@
+namespace ToneCustoms.ShellStudio.Core;
+public sealed record WallOpening(Guid WallId,float Offset,float Width,float Height,float SillHeight,bool Door);
+public sealed class WallOpeningService { readonly List<WallOpening> openings=[];public IReadOnlyList<WallOpening> Openings=>openings;public WallOpening Add(SceneObject wall,float offset,float width,float height,float sill,bool door){if(wall.Type!=SceneObjectType.Wall)throw new ArgumentException("Opening target must be a wall");if(width<=0||height<=0||width>=wall.Scale.X)throw new ArgumentOutOfRangeException(nameof(width));var o=new WallOpening(wall.Id,offset,width,height,sill,door);openings.Add(o);return o;} }

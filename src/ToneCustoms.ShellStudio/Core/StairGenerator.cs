@@ -1,0 +1,2 @@
+namespace ToneCustoms.ShellStudio.Core;
+public sealed class StairGenerator { public IEnumerable<SceneObject> Generate(Vec3 start,float width,float rise,float run,int steps,int floor=0){if(steps<1)throw new ArgumentOutOfRangeException(nameof(steps));var h=rise/steps;var d=run/steps;for(int i=0;i<steps;i++)yield return new(){Name=$"Stair {i+1}",Type=SceneObjectType.Stairs,Position=new(start.X,start.Y+d*(i+.5f),start.Z+h*(i+.5f)),Scale=new(width,d,h*(i+1)),FloorLevel=floor};} }
