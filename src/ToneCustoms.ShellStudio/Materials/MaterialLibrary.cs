@@ -1,0 +1,2 @@
+namespace ToneCustoms.ShellStudio.Materials;
+public sealed class MaterialLibrary{public IReadOnlyList<string> Scan(string root){if(!Directory.Exists(root))return Array.Empty<string>();return Directory.EnumerateFiles(root,"*.*",SearchOption.AllDirectories).Where(x=>new[]{".dds",".png",".tga"}.Contains(Path.GetExtension(x).ToLowerInvariant())).OrderBy(x=>x,StringComparer.OrdinalIgnoreCase).ToList();}public static bool IsGtaTexture(string path)=>Path.GetExtension(path).Equals(".dds",StringComparison.OrdinalIgnoreCase);}
