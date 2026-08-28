@@ -1,0 +1,8 @@
+using System.Diagnostics;using System.Text.Json;using ToneCustoms.ShellStudio.Core;
+namespace ToneCustoms.ShellStudio.Bridges;
+public sealed record BlenderRoundTripResult(bool Success,string Message,string? BlendPath=null);
+public sealed class BlenderRoundTripService
+{
+ public async Task<BlenderRoundTripResult> SendAsync(ShellProject project,string blenderExe,string bridgeScript,string workspace,CancellationToken ct=default){if(!File.Exists(blenderExe))return new(false,"Blender executable not found.");if(!File.Exists(bridgeScript))return new(false,"Shell Studio Blender bridge script not found.");Directory.CreateDirectory(workspace);var json=Path.Combine(workspace,"shellstudio-project.json");await File.WriteAllTextAsync(json,JsonSerializer.Serialize(project,new JsonSerializerOptions{WriteIndented=true}),ct);var psi=new ProcessStartInfo(blenderExe,$"--background --python \"{bridgeScript}\" -- \"{json}\" \"{workspace}\""){UseShellExecute=false,CreateNoWindow=true,RedirectStandardOutput=true,RedirectStandardError=true};using var p=Process.Start(psi);if(p==null)return new(false,"Could not start Blender.");await p.WaitForExitAsync(ct);var blend=Path.Combine(workspace,"shellstudio_generated.blend");return p.ExitCode==0&&File.Exists(blend)?new(true,"Blender project generated.",blend):new(false,"Blender bridge failed: "+await p.StandardError.ReadToEndAsync(ct));}
+ public async Task<ShellProject> ImportProjectAsync(string json,CancellationToken ct=default){if(!File.Exists(json))throw new FileNotFoundException("Blender round-trip project was not found.",json);var p=JsonSerializer.Deserialize<ShellProject>(await File.ReadAllTextAsync(json,ct));return p??throw new InvalidDataException("Blender round-trip project is invalid.");}
+}
