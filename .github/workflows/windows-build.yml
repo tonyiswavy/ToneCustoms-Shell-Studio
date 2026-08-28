@@ -2,6 +2,7 @@ name: Windows Build
 on:
   push:
     branches: [ main, build/full-foundation ]
+    tags: [ 'v*' ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -17,10 +18,17 @@ jobs:
         run: dotnet restore src/ToneCustoms.ShellStudio/ToneCustoms.ShellStudio.csproj
       - name: Restore tests
         run: dotnet restore tests/ToneCustoms.ShellStudio.Tests/ToneCustoms.ShellStudio.Tests.csproj
+      - name: Build
+        run: dotnet build src/ToneCustoms.ShellStudio/ToneCustoms.ShellStudio.csproj -c Release --no-restore
       - name: Test
         run: dotnet test tests/ToneCustoms.ShellStudio.Tests/ToneCustoms.ShellStudio.Tests.csproj -c Release --no-restore
       - name: Publish self-contained Windows application
-        run: dotnet publish src/ToneCustoms.ShellStudio/ToneCustoms.ShellStudio.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o publish
+        run: dotnet publish src/ToneCustoms.ShellStudio/ToneCustoms.ShellStudio.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishReadyToRun=true -o publish
+      - name: Verify executable
+        shell: pwsh
+        run: |
+          if (!(Test-Path publish/ToneCustomsShellStudio.exe)) { throw 'ToneCustomsShellStudio.exe was not produced' }
+          if ((Get-Item publish/ToneCustomsShellStudio.exe).Length -lt 1MB) { throw 'Published executable is unexpectedly small' }
       - name: Generate SHA256
         shell: pwsh
         run: Get-FileHash publish/ToneCustomsShellStudio.exe -Algorithm SHA256 | Select-Object -ExpandProperty Hash | Out-File publish/ToneCustomsShellStudio.exe.sha256
@@ -28,3 +36,4 @@ jobs:
         with:
           name: ToneCustoms-Shell-Studio-Windows
           path: publish/
+          if-no-files-found: error
