@@ -1,0 +1,5 @@
+# Full product scope
+
+The same application is being built to cover: 3D viewport; wall/room/floor/ceiling/door/window/stair tools; multi-floor editing; move/rotate/scale gizmos; grid and smart snapping; measurements; duplicate/mirror workflows; trim/baseboard and opening presets; custom model imports; GTA/custom prop catalog; DDS-first materials with diffuse/normal/specular handling; texture tiling; collision and bounds preview/generation; player-height walk preview; lighting preview; scene performance analysis; optimization guidance; autosave/recovery; project snapshots; starter templates; Simple and Advanced modes; dependency diagnostics; Blender headless processing; Sollumz GTA conversion; CodeWalker inspection; validation/autofix; FiveM resource assembly; automated Windows builds and update infrastructure.
+
+A feature being represented in the UI does not mean it is complete. Completion requires its implementation and validation. GTA export cannot be considered complete until real generated assets pass the external GTA/FiveM toolchain and in-game testing.

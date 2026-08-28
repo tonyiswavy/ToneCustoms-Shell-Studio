@@ -1,0 +1,2 @@
+namespace ToneCustoms.ShellStudio.Core;
+public sealed class RecoveryService { public IEnumerable<string> FindAutosaves(string root)=>Directory.Exists(Path.Combine(root,"Autosave"))?Directory.EnumerateFiles(Path.Combine(root,"Autosave"),"*.autosave.tcshell",SearchOption.AllDirectories):[]; public void Prune(string root,int keep=20){var d=Path.Combine(root,"Autosave");if(!Directory.Exists(d))return;foreach(var f in Directory.GetFiles(d).OrderByDescending(File.GetLastWriteTimeUtc).Skip(keep))File.Delete(f);} }

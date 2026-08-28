@@ -1,0 +1,3 @@
+namespace ToneCustoms.ShellStudio.Core;
+public sealed record OptimizationSuggestion(string Area,string Message,bool SafeAutoFix);
+public sealed class OptimizationService { public IEnumerable<OptimizationSuggestion> Analyze(ShellProject p){if(p.Objects.Count>500)yield return new("Geometry","High scene object count; combine static architectural sections during GTA export.",false);if(p.Materials.Count>64)yield return new("Materials","High material count; reuse compatible materials.",false);if(p.Objects.Count(x=>x.Collision)>400)yield return new("Collision","High collision object count; simplify collision meshes.",false);} }
