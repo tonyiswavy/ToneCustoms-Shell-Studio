@@ -1,0 +1,4 @@
+using System.Text.RegularExpressions;
+namespace ToneCustoms.ShellStudio.Bridges;
+public sealed record SollumzInstall(bool Found,string? Root,string? Version);
+public sealed class SollumzVersionDetector { public SollumzInstall Detect(){var root=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"Blender Foundation","Blender");if(!Directory.Exists(root))return new(false,null,null);string? folder=null;try{folder=Directory.EnumerateDirectories(root,"*",SearchOption.AllDirectories).FirstOrDefault(x=>Path.GetFileName(x).Contains("sollumz",StringComparison.OrdinalIgnoreCase));}catch{}if(folder==null)return new(false,null,null);string? version=null;var init=Path.Combine(folder,"__init__.py");if(File.Exists(init)){var text=File.ReadAllText(init);var m=Regex.Match(text,"['\"]version['\"]\\s*:\\s*\\(([^)]*)\\)");if(m.Success)version=m.Groups[1].Value.Replace(",",".").Replace(" ","");}return new(true,folder,version);} }
