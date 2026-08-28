@@ -1,0 +1,3 @@
+namespace ToneCustoms.ShellStudio.Core;
+public sealed record ShellTemplate(string Id,string Name,string Description);
+public sealed class TemplateCatalog { public IReadOnlyList<ShellTemplate> All {get;}=[new("empty","Empty","Blank shell project"),new("bedroom","Bedroom","Small single-room shell"),new("apartment","Apartment","Apartment starter shell"),new("house","House","House-sized shell"),new("store","Store","Retail shell"),new("office","Office","Office shell"),new("warehouse","Warehouse","Large industrial shell"),new("restaurant","Restaurant","Restaurant shell"),new("club","Club","Nightclub shell")]; }
