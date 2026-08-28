@@ -1,0 +1,4 @@
+using System.Numerics;
+namespace ToneCustoms.ShellStudio.Core;
+public sealed record OpeningPreset(string Name,float Width,float Height,float SillHeight);
+public sealed class OpeningPresetService { public IReadOnlyList<OpeningPreset> Doors {get;}=[new("Standard Door",.9f,2.1f,0),new("Double Door",1.8f,2.2f,0),new("Wide Entry",2.4f,2.4f,0)]; public IReadOnlyList<OpeningPreset> Windows {get;}=[new("Small Window",.8f,.8f,1.1f),new("Standard Window",1.2f,1.2f,.9f),new("Wide Window",2.0f,1.3f,.8f)]; public SceneObject Create(OpeningPreset p,bool door,Vector3 at)=>new(){Name=p.Name,Type=door?SceneObjectType.Door:SceneObjectType.Window,Position=at+new Vector3(0,0,p.SillHeight+p.Height/2),Scale=new(p.Width,.15f,p.Height)}; }

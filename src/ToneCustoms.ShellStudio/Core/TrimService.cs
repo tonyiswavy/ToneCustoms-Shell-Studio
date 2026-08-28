@@ -1,0 +1,2 @@
+namespace ToneCustoms.ShellStudio.Core;
+public sealed class TrimService { public IEnumerable<SceneObject> CreateBaseboards(IEnumerable<SceneObject> walls,float height=.12f,float depth=.025f)=>walls.Where(x=>x.Type==SceneObjectType.Wall).Select(w=>new SceneObject{Name=w.Name+" Baseboard",Type=SceneObjectType.Prop,Position=new(w.Position.X,w.Position.Y,height/2),Rotation=w.Rotation,Scale=new(w.Scale.X,depth,height),FloorLevel=w.FloorLevel,Collision=false,MaterialId=w.MaterialId}); }

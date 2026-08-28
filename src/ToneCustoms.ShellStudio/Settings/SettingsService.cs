@@ -1,0 +1,3 @@
+using System.Text.Json;
+namespace ToneCustoms.ShellStudio.Settings;
+public sealed class SettingsService { public string Root=>Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"ToneCustoms","ShellStudio");public string FilePath=>Path.Combine(Root,"settings.json");public AppSettings Load(){try{return System.IO.File.Exists(FilePath)?JsonSerializer.Deserialize<AppSettings>(System.IO.File.ReadAllText(FilePath))??new():new();}catch{return new();}}public void Save(AppSettings s){Directory.CreateDirectory(Root);System.IO.File.WriteAllText(FilePath,JsonSerializer.Serialize(s,new JsonSerializerOptions{WriteIndented=true}));} }
