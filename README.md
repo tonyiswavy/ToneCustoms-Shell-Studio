@@ -1,6 +1,17 @@
+<div align="center">
+
 # ToneCustoms Shell Studio
 
 **FiveM Shell Creation Studio — Public Development Overview**
+
+**Built for Roleplay. Made with Purpose.**
+
+[![YouTube](https://img.shields.io/badge/Subscribe-YouTube-B9232D?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@tonyiswavy12)
+[![Discord](https://img.shields.io/badge/Join-Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/JdZ7NTG5KF)
+[![GitHub](https://img.shields.io/badge/Follow-GitHub-24292F?style=for-the-badge&logo=github&logoColor=white)](https://github.com/tonyiswavy)
+[![Store](https://img.shields.io/badge/Browse-Tebex-7B2CBF?style=for-the-badge)](https://tonecustoms.tebex.store/)
+
+</div>
 
 > **Project status: In development / planning.** This repository currently contains a project README describing intended functionality. It does **not** currently provide an installable Windows application, verified build, or public release. Features below represent development targets, **not completed capabilities**.
 
@@ -29,11 +40,12 @@ A standalone Windows application intended to simplify FiveM interior-shell creat
 
 A completed end-to-end flow must be validated: prepare a shell, use supported materials/props, export the resource, load it on a FiveM test server, and verify geometry, textures and collision. Known blocking issues must be resolved or clearly disclosed.
 
-## For updates
+## For updates and community
 
 - [ToneCustoms product documentation](https://github.com/tonyiswavy/tonecustoms-docs/tree/main/products)
-- [Official ToneCustoms YouTube](https://www.youtube.com/@tonyiswavy12)
-- [ToneCustoms Discord](https://discord.gg/JdZ7NTG5KF)
+- [Subscribe to ToneCustoms YouTube](https://www.youtube.com/@tonyiswavy12)
+- [Join ToneCustoms Discord](https://discord.gg/JdZ7NTG5KF)
+- [Follow ToneCustoms on GitHub](https://github.com/tonyiswavy)
 
 **Private working files and commercial distribution, if any, are not provided through this public roadmap.**
 
